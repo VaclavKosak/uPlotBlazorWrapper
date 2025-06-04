@@ -8,6 +8,7 @@
     [Parameter] public string Title { get; set; } = "Chart";
     [Parameter] public List<string> SeriesLabels { get; set; } = new();
     [Parameter] public List<List<double>> InitialData { get; set; } = new();
+    [Parameter] public List<string> LineColors { get; set; } = new();
     [Parameter] public EventCallback<List<List<double>>> OnDataUpdate { get; set; }
 
     private DotNetObjectReference<ChartComponent>? _dotNetRef;
@@ -17,7 +18,7 @@
         if (firstRender)
         {
             _dotNetRef = DotNetObjectReference.Create(this);
-            await JSRuntime.InvokeVoidAsync("uPlotInterop.initChart", ChartId, Title, SeriesLabels, InitialData);
+            await JSRuntime.InvokeVoidAsync("uPlotInterop.initChart", ChartId, Title, SeriesLabels, InitialData, LineColors);
         }
     }
 

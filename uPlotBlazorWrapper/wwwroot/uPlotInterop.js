@@ -1,5 +1,5 @@
 window.uPlotInterop = {
-    initChart: function (chartId, title, seriesLabels, initialData) {
+    initChart: function (chartId, title, seriesLabels, initialData, lineColors) {
         console.log("Initializing chart with data:", initialData);
         const opts = {
             title: title,
@@ -9,7 +9,7 @@ window.uPlotInterop = {
                 {},
                 ...seriesLabels.map((label, index) => ({
                     label: label,
-                    stroke: ["red", "blue", "green"][index] || "black", // Assign colors to series
+                    stroke: lineColors[index] || "black", // Use provided colors or fallback to black
                     width: 2 // Set line width for better visibility
                 }))
             ],
