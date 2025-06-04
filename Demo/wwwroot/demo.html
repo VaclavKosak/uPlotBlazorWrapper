@@ -15,6 +15,8 @@
 <body>
 <h2 id="wait">Loading lib....</h2>
 
+<div id="chart"></div>
+
 <script>
     function round2(val) {
         return Math.round(val * 100) / 100;
@@ -65,7 +67,7 @@
             return d;
         }
 
-        let interval = 100;
+        let interval = 10;
 
         let makeFmt = suffix => (u, v, sidx, didx) => {
             if (didx == null) {
@@ -270,10 +272,10 @@
         };
 
         let start3 = 0;
-        let len3 = 10;
+        let len3 = 100;
 
         let data3 = sliceData(start3, start3 + len3);
-        let uplot3 = new uPlot(opts3, data3, document.body);
+        let uplot3 = new uPlot(opts3, data3, "#chart");
 
         setInterval(function() {
             len3 += 10;
