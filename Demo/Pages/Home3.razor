@@ -8,9 +8,11 @@
 Welcome to your new app.
 
 <h3>Chart Demo</h3>
-<ChartComponent ChartId="chart1" Title="Simple Chart" SeriesLabels="@(new List<string> { "Value", "Value x" })" InitialData="_data" LineColors="@(new List<string> { "#000000", "#008000" })" @ref="_chartComponent" />
+<ChartComponent ChartId="chart1" Title="Simple Chart" SeriesLabels="@(new List<string> { "Value", "Value x" })"
+                InitialData="_data" LineColors="@(new List<string> { "#000000", "#008000" })" @ref="_chartComponent"/>
 
 @code {
+
     private List<List<double>> _data =
     [
         new() { 0, 1, 2, 3, 4, 5 }, // X-axis

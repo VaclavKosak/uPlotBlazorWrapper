@@ -8,18 +8,20 @@
 Welcome to your new app.
 
 <h3>Chart Demo</h3>
-<ChartComponent ChartId="chart1" Title="Simple Chart" SeriesLabels="@(new List<string> { "CPU", "RAM", "TCP Out" })" InitialData="_data" @ref="_chartComponent" />
+<ChartComponent ChartId="chart1" Title="Simple Chart" SeriesLabels="@(new List<string> { "CPU", "RAM", "TCP Out" })"
+                InitialData="_data" @ref="_chartComponent"/>
 
 <h4>Debug Data:</h4>
 <pre>@System.Text.Json.JsonSerializer.Serialize(_data)</pre>
 
 @code {
+
     private List<List<double>> _data = new()
     {
         new List<double> { 0, 1, 2, 3, 4, 5 }, // X-axis
         new List<double> { 10, 20, 30, 40, 50, 60 }, // CPU
         new List<double> { 15, 25, 35, 45, 55, 65 }, // RAM
-        new List<double> { 5, 15, 25, 35, 45, 55 }  // TCP Out
+        new List<double> { 5, 15, 25, 35, 45, 55 } // TCP Out
     };
 
     private ChartComponent? _chartComponent;
@@ -41,7 +43,7 @@ Welcome to your new app.
             _data[0].Add(_counter); // X-axis
             _data[1].Add(10 + _counter * 2); // CPU
             _data[2].Add(15 + _counter * 3); // RAM
-            _data[3].Add(5 + _counter * 4);  // TCP Out
+            _data[3].Add(5 + _counter * 4); // TCP Out
             _counter++;
 
             // Limit the length of data series to 100 points
@@ -65,4 +67,5 @@ Welcome to your new app.
     {
         _timer?.Dispose();
     }
+
 }
