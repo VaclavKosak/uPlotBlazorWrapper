@@ -1,0 +1,52 @@
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<div id="@ChartId" style="width: 100%; height: 400px;"></div>
+
+@code {
+    [Parameter] public string ChartId { get; set; } = $"chart-{Guid.NewGuid()}";
+    [Parameter] public string Title { get; set; } = "Chart";
+    [Parameter] public List<string> SeriesLabels { get; set; } = new();
+    [Parameter] public List<List<double>> InitialData { get; set; } = new();
+    [Parameter] public EventCallback<List<List<double>>> OnDataUpdate { get; set; }
+
+    private DotNetObjectReference<ChartComponent>? _dotNetRef;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _dotNetRef = DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("uPlotInterop.initChart", ChartId, Title, SeriesLabels, InitialData);
+        }
+    }
+
+    [JSInvokable]
+    public async Task UpdateData(List<List<double>> newData)
+    {
+        await JSRuntime.InvokeVoidAsync("uPlotInterop.updateChart", ChartId, newData);
+    }
+
+    public async Task AddData(List<List<double>> newData)
+    {
+        await UpdateData(newData);
+        if (OnDataUpdate.HasDelegate)
+        {
+            await OnDataUpdate.InvokeAsync(newData);
+        }
+    }
+
+    public async Task UpdateChartData(List<List<double>> newData)
+    {
+        await JSRuntime.InvokeVoidAsync("uPlotInterop.updateChart", ChartId, newData);
+        if (OnDataUpdate.HasDelegate)
+        {
+            await OnDataUpdate.InvokeAsync(newData);
+        }
+    }
+
+    public void Dispose()
+    {
+        _dotNetRef?.Dispose();
+    }
+}
