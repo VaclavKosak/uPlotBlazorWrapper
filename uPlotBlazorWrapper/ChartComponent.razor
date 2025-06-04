@@ -36,15 +36,6 @@
         }
     }
 
-    public async Task UpdateChartData(List<List<double>> newData)
-    {
-        await JSRuntime.InvokeVoidAsync("uPlotInterop.updateChart", ChartId, newData);
-        if (OnDataUpdate.HasDelegate)
-        {
-            await OnDataUpdate.InvokeAsync(newData);
-        }
-    }
-
     public void Dispose()
     {
         _dotNetRef?.Dispose();
