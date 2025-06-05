@@ -22,9 +22,4 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.11"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Content Include="wwwroot\uPlotInterop.js" Pack="true" PackagePath="contentFiles\any\net8.0\wwwroot\" />
-        <Content Include="wwwroot\uPlot.min.css" Pack="true" PackagePath="contentFiles\any\net8.0\wwwroot\" />
-    </ItemGroup>
-
 </Project>
