@@ -5,6 +5,11 @@ window.uPlotInterop = {
             title: title,
             width: 800,
             height: 400,
+            scales: {
+                x: {
+                    time: false,
+                },
+            },
             series: [
                 {},
                 ...seriesLabels.map((label, index) => ({
