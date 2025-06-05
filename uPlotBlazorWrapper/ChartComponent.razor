@@ -28,9 +28,9 @@
         await ChartJsInterop.UpdateChart(ChartId, newData);
     }
 
-    public async Task AddData(List<List<double>> newData)
+    public async Task AppendData(List<List<double>> newData)
     {
-        await UpdateData(newData);
+        await ChartJsInterop.AppendData(ChartId, newData);
         if (OnDataUpdate.HasDelegate)
         {
             await OnDataUpdate.InvokeAsync(newData);

@@ -20,4 +20,10 @@ public class ChartJsInterop(IJSRuntime jsRuntime)
         await _moduleTask.Value;
         await jsRuntime.InvokeVoidAsync("uPlotInterop.updateChart", chartId, newData);
     }
+
+    public async ValueTask AppendData(string chartId, List<List<double>> newData)
+    {
+        await _moduleTask.Value;
+        await jsRuntime.InvokeVoidAsync("uPlotInterop.appendData", chartId, newData);
+    }
 }

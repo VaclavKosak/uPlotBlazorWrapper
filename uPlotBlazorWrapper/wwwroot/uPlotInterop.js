@@ -24,14 +24,25 @@ window.uPlotInterop = {
 
         const chartElement = document.getElementById(chartId);
         const uplot = new uPlot(opts, initialData, chartElement);
-
         chartElement.uplot = uplot;
+        chartElement.uplotData = initialData;
     },
 
     updateChart: function (chartId, newData) {
         const chartElement = document.getElementById(chartId);
         if (chartElement && chartElement.uplot) {
             chartElement.uplot.setData(newData);
+            chartElement.uplotData = newData;
+        }
+    },
+
+    appendData: function (chartId, newData) {
+        const chartElement = document.getElementById(chartId);
+        if (chartElement && chartElement.uplot && chartElement.uplotData) {
+            for (let i = 0; i < chartElement.uplotData.length; i++) {
+                chartElement.uplotData[i] = chartElement.uplotData[i].concat(newData[i]);
+            }
+            chartElement.uplot.setData(chartElement.uplotData);
         }
     }
 };
